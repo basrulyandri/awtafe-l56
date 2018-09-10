@@ -7,6 +7,11 @@ Route::get('/',[
 	]
 );
 
+Route::get('buku/{slug}', [
+		'uses' => 'PageController@bukusingle',
+		'as' => 'page.buku.single',
+	]);
+
 Route::group(['middleware' => 'rbac'],function(){
 	Route::get('roles',[
 		'uses' => 'RoleController@index',
@@ -115,6 +120,18 @@ Route::group(['middleware' => 'rbac'],function(){
 		'uses' => 'UserController@myprofile',
 		'as' => 'user.myprofile',
 	]);
+	Route::get('collections', [
+			'uses' => 'CollectionController@index',
+			'as' => 'collection.index',
+		]);
+	Route::get('collection/{collection}/show', [
+			'uses' => 'CollectionController@show',
+			'as' => 'collection.show',
+		]);
+	Route::get('collection/{collection}/destroy', [
+			'uses' => 'CollectionController@destroy',
+			'as' => 'collection.destroy',
+		]);
 
 	Route::get('fatwa',[
 		'uses' => 'CollectionController@fatwa',
@@ -129,6 +146,21 @@ Route::group(['middleware' => 'rbac'],function(){
 	Route::post('fatwa/insert',[
 		'uses' => 'CollectionController@insertFatwa',
 		'as' => 'fatwa.insert',
+	]);
+
+	Route::get('book',[
+		'uses' => 'CollectionController@book',
+		'as' => 'book.index',
+	]);
+
+	Route::get('book/add',[
+		'uses' => 'CollectionController@addbook',
+		'as' => 'book.add',
+	]);
+
+	Route::post('book/insert',[
+		'uses' => 'CollectionController@insertbook',
+		'as' => 'book.insert',
 	]);
 });
 

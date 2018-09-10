@@ -185,9 +185,12 @@ function wilayah($idvillage){
     return $wilayah->kelurahan.' '.$wilayah->kecamatan.' '.$wilayah->kabupaten.' '.$wilayah->provinsi;
 }
 
-function collections()
+function collections($type_id= 0,$limit = 12)
 {
-	return \App\Collection::all();
+	if($type_id == 0){
+		return \App\Collection::orderBy('created_at','desc')->limit($limit)->get();		
+	}
+	return \App\Collection::whereTypeId($type_id)->orderBy('created_at','desc')->limit($limit)->get();
 }
 
 

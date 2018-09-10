@@ -30,9 +30,9 @@
              @foreach(collections() as $collection)
             <div class="col-md-2">
               <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="{{url('/')}}/{{$collection->thumbnail}}">
+                <a href="{{route('page.buku.single',$collection->slug)}}"><img class="card-img-top" src="{{url('/')}}{{$collection->thumbnail}}"></a>
                 <div class="card-body book-title-box">
-                  <p class="card-text">{{$collection->title}}</p>
+                  <p class="card-text"><a href="{{route('page.buku.single',$collection->slug)}}">{{$collection->title}}</a></p>
                   <div class="d-flex justify-content-between align-items-center">
                     
                       <button type="button" class="btn btn-sm btn-block btn-primary">Detail</button>                      

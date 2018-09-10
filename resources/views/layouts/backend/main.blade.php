@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{!!url('assets')!!}/backend/dist/css/bas-style.css">
     <link rel="stylesheet" href="{!!url('assets')!!}/backend/plugins/sweetalert/sweetalert.css">
     <link rel="stylesheet" href="{{url('assets/backend/plugins/datatables')}}/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/backend/plugins/toastr')}}/toastr.min.css">
 
     @yield('header')
 
@@ -67,7 +68,7 @@
             <a class="btn btn-app bg-olive">
               <i class="fa fa-archive"></i> Ijtima'
             </a>
-            <a class="btn btn-app bg-navy">
+            <a href="{{route('book.add')}}" class="btn btn-app bg-navy">
               <i class="fa fa-book"></i> Buku
             </a>
             <a class="btn btn-app bg-maroon">
@@ -99,6 +100,7 @@
     <script src="{!!url('assets')!!}/backend/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="{{url('assets/backend/plugins/datatables')}}/jquery.dataTables.min.js"></script>
     <script src="{{url('assets/backend/plugins/datatables')}}/dataTables.bootstrap.min.js"></script>
+    <script src="{{url('assets/backend/plugins/toastr')}}/toastr.min.js"></script>
     <script type="text/javascript">
       @if(Session::has('success'))
       swal({title: "Success",
@@ -116,10 +118,19 @@
               showConfirmButton: true });
       @endif
 
+      @if(Session::has('toastr-success'))
+        toastr.success('Sukses', '{{Session::get('toastr-success')}}')
+      @endif
+
+      @if(Session::has('toastr-error'))
+        
+      @endif
+
       $(document).ready(function(){
         $('ul.treeview-menu > li.active').parent().parent().addClass('active');
 
         console.log($('ul.treeview-menu:not(:has("li"))').parent().hide());
+
       });
     </script>
     @yield('footer')

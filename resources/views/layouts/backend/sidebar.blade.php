@@ -77,10 +77,7 @@
               </ul>
             </li>          
 
-            <li><a href="{{route('fatwa.index')}}"><i class="fa fa-file-archive-o"></i> Fatwa</a></li>
-            <li><a href="#"><i class="fa fa-archive"></i> Ijtima'</a></li>
-            <li><a href="#"><i class="fa fa-book"></i> Buku</a></li>
-            <li><a href="#"><i class="fa fa-pencil"></i> Artikel</a></li>
+            <li><a href="{{route('collection.index')}}"><i class="fa fa-file-archive-o"></i> Koleksi</a></li>            
             <li><a target="_blank" href="{{route('page.home')}}"><i class="fa fa-globe"></i>Site</a></li>
 
           </ul>

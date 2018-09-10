@@ -21,7 +21,7 @@
 
 	        <div class="info-box-content">
 	          <span class="info-box-text">Fatwa</span>
-	          <span class="info-box-number">101</small></span>
+	          <span class="info-box-number">{{collections(1)->count()}}</small></span>
 	        </div>
         <!-- /.info-box-content -->
       	</div>
@@ -34,7 +34,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Ijtima'</span>
-          <span class="info-box-number">219</span>
+          <span class="info-box-number">{{collections(2)->count()}}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -47,7 +47,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Buku</span>
-          <span class="info-box-number">154</span>
+          <span class="info-box-number">{{collections(3)->count()}}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -60,7 +60,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Artikel</span>
-          <span class="info-box-number">112</span>
+          <span class="info-box-number">{{collections(4)->count()}}</span>
         </div>
         <!-- /.info-box-content -->
       </div>

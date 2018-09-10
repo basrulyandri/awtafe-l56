@@ -6,12 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Mail;
+use App\Collection;
 
 class PageController extends Controller
 {
     
     public function home(){
     	return view('pages.home');
+    }
+
+    public function bukusingle($slug)
+    {
+        $buku = Collection::whereSlug($slug)->first();
+        return view('pages.bukusingle',compact('buku'));
     }
 
     public function downloadbrosur()

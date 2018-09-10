@@ -27,7 +27,7 @@
               <ul class="list-unstyled">
                 <li><a href="#" class="text-white"><i class="fa fa-facebook"></i>Instagram</a></li>
                 <li><a href="#" class="text-white"><i class="fa fa-facebook"></i>Facebook</a></li>
-                <li><a href="#" class="text-white"><i class="fa fa-facebook"></i>Email</a></li>
+                <li><a href="{{route('auth.login')}}" class="text-white"><i class="fa fa-facebook"></i>Login</a></li>
               </ul>
             </div>
           </div>
@@ -35,7 +35,7 @@
       </div>
       <div class="navbar navbar-dark bg-info shadow-sm">
         <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">           
+          <a href="{{route('page.home')}}" class="navbar-brand d-flex align-items-center">           
             <i class="fas fa-book-reader" style="margin-right: 5px;"> </i> <strong>   E-LITERATUR MUI</strong>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,5 +57,6 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{asset('assets/frontend/js')}}/jquery.slim.min.js"></script>
     <script type="text/javascript" src="{{asset('assets/frontend/js')}}/bootstrap.min.js"></script>
+    @yield('footer')
   </body>
 </html>

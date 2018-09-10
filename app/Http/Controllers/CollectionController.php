@@ -5,13 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Author;
+use App\Collection;
 
 class CollectionController extends Controller
 {
 
+    public function index()
+    {
+        $collections = Collection::OrderBy('created_at','desc')->paginate(5);
+        return view('collections.index',compact(['collections']));
+    }
+
+    public function show(Collection $collection)
+    {
+        return view('collections.show',compact(['collection']));
+    }
+
+    public function destroy(Collection $collection)
+    {
+        $collection->delete();
+        return redirect()->route('collection.index')->with('toastr-success','Koleksi Berhasil di hapus.');
+    }
 	public function fatwa()
 	{
-		$fatwas = \App\Collection::whereTypeId(1)->get();
+		$fatwas = Collection::whereTypeId(1)->get();
 		return view('fatwa/index',compact(['fatwas']));
 	}
     public function addFatwa()
@@ -25,5 +43,23 @@ class CollectionController extends Controller
         //dd($request->all());
     	$fatwa = \App\Collection::create($request->all());
     	return redirect()->route('fatwa.index')->with('success','Data Fatwa Berhasil ditambahkan');
+    }
+
+    public function book()
+    {
+        
+    }
+
+    public function addbook()
+    {
+        $authors = Author::pluck('name','id')->prepend('Pilih','')->toArray();
+        $categories = \App\Category::whereTypeId(3)->pluck('name','id')->prepend('Pilih','')->toArray();
+        return view('books.add',compact(['categories','authors']));
+    }
+
+    public function insertbook(Request $request)
+    {
+        $fatwa = \App\Collection::create($request->all());
+        return redirect()->route('book.index')->with('success','Data Buku Berhasil ditambahkan');
     }
 }
