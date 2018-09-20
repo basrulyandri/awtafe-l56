@@ -20,7 +20,7 @@ class AuthController extends Controller
         ]);  
     	if(Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')])){
             
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/admin/dashboard');
             }                      
         return redirect()->route('auth.login')->withInput();
     }
@@ -28,7 +28,7 @@ class AuthController extends Controller
 
     public function logout(){
     	Auth::logout();
-    	return redirect()->route('home');
+    	return redirect()->route('page.home');
     }
 
     public function error401(){

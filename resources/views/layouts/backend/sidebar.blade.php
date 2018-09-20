@@ -77,7 +77,8 @@
               </ul>
             </li>          
 
-            <li><a href="{{route('collection.index')}}"><i class="fa fa-file-archive-o"></i> Koleksi</a></li>            
+            <li><a href="{{route('collection.index')}}"><i class="fa fa-file-archive-o"></i> Koleksi</a></li> 
+            <li><a href="{{route('author.index')}}"><i class="fa fa-pencil"></i> Penulis</a></li>            
             <li><a target="_blank" href="{{route('page.home')}}"><i class="fa fa-globe"></i>Site</a></li>
 
           </ul>

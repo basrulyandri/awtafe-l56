@@ -12,7 +12,7 @@ Route::get('buku/{slug}', [
 		'as' => 'page.buku.single',
 	]);
 
-Route::group(['middleware' => 'rbac'],function(){
+Route::group(['middleware' => 'rbac','prefix' => 'admin'],function(){
 	Route::get('roles',[
 		'uses' => 'RoleController@index',
 		'as' => 'roles.list',
@@ -162,6 +162,11 @@ Route::group(['middleware' => 'rbac'],function(){
 		'uses' => 'CollectionController@insertbook',
 		'as' => 'book.insert',
 	]);
+
+	Route::get('author', [
+			'uses' => 'AuthorController@index',
+			'as' => 'author.index',
+		]);
 });
 
 

@@ -24,13 +24,15 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="img-responsive" src="{{url('/')}}{{$collection->thumbnail}}" alt="User profile picture">
+              <img class="img-responsive" src="{{url('/')}}{{$collection->thumbnail}}" alt="User profile picture" style="width:100%;">
 
               <h3 class="profile-username text-center">{{$collection->title}}</h3>
-
+              @if($collection->isBuku())
               <p class="text-muted text-center">Penulis</p>
-               <p class="text-muted text-center">{{$collection->author->name}}</p>
-
+                @foreach($collection->authors as $author)
+                  <p class="text-muted text-center">{{$author->name}}</p>
+                @endforeach
+              @endif
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
                   <b>Kode</b> <a class="pull-right">{{$collection->code}}</a>
@@ -49,7 +51,14 @@
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-header" style="cursor: move;">
-              <h3 class="box-title">Sinopsis</h3>
+              <h3 class="box-title">
+              @if($collection->isBuku())
+                Sinopsis
+              @endif
+              @if($collection->isFatwa())
+                Ringkasan
+              @endif
+              </h3>
             </div>
             <div class="box-body">
               {!!$collection->content!!}

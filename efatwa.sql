@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2018 at 06:48 PM
+-- Generation Time: Sep 20, 2018 at 12:07 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -31,10 +31,40 @@ SET time_zone = "+00:00";
 CREATE TABLE `authors` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
-  `bio` varchar(45) DEFAULT NULL,
+  `bio` text,
   `photo` varchar(45) DEFAULT NULL,
   `cv` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `authors`
+--
+
+INSERT INTO `authors` (`id`, `name`, `bio`, `photo`, `cv`) VALUES
+(1, 'Dr. Hayu Prabowo', 'Ketua Lembaga Pemuliaan Lingkungan Hidup Dan Sumber Daya Alam MUI', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `author_collection`
+--
+
+CREATE TABLE `author_collection` (
+  `id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `collection_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `author_collection`
+--
+
+INSERT INTO `author_collection` (`id`, `author_id`, `collection_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 14, '2018-09-10 15:32:37', '0000-00-00 00:00:00'),
+(2, 1, 16, '2018-09-10 15:32:37', '0000-00-00 00:00:00'),
+(3, 1, 17, '2018-09-10 15:32:48', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -58,7 +88,8 @@ INSERT INTO `categories` (`id`, `name`, `description`, `type_id`) VALUES
 (2, 'LPPOM dan IPTEK', NULL, 1),
 (3, 'Akidah dan Aliran Agama', NULL, 1),
 (4, 'Ibadah', NULL, 1),
-(5, 'Sosial Budaya', NULL, 1);
+(5, 'Sosial Budaya', NULL, 1),
+(6, 'Lingkungan Hidup', 'Buku lingkungan Hidup', 3);
 
 -- --------------------------------------------------------
 
@@ -72,14 +103,14 @@ CREATE TABLE `collections` (
   `date` varchar(45) DEFAULT NULL,
   `type_id` int(11) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
-  `content` varchar(45) DEFAULT NULL,
+  `slug` longtext NOT NULL,
+  `content` text,
   `description` text,
   `filename` varchar(100) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `parent` int(11) DEFAULT NULL,
-  `author_id` int(11) DEFAULT NULL,
-  `thumbnail` varchar(100) DEFAULT NULL,
+  `thumbnail` longtext,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -88,13 +119,13 @@ CREATE TABLE `collections` (
 -- Dumping data for table `collections`
 --
 
-INSERT INTO `collections` (`id`, `code`, `date`, `type_id`, `title`, `content`, `description`, `filename`, `user_id`, `category_id`, `parent`, `author_id`, `thumbnail`, `created_at`, `updated_at`) VALUES
-(8, '40 Tahun 2011', '2011-10-24', 1, 'BADAL THAWAF IFADHAH', '', 'Badal Thawaf Ifadhah adalah pelaksanaan thawaf ifadhah yang merupakan rukun haji yang dilakukankan oleh orang lain untuk menggantikan seseorang yang sedang berhaji karena sakit atau sebab lain.', '1483972025_No.-40-Badal-Tawaf-Ifadhah.pdf', 85, 4, NULL, NULL, '/photos/85/1 (2).jpg', '2017-01-09 00:27:05', '2018-09-08 21:10:31'),
-(9, '22 Tahun 2011', '2011-05-26', 1, 'PERTAMBANGAN RAMAH LINGKUNGAN', '', 'Pertambangan adalah sebagian atau seluruh tahapan kegiatan dalam rangka penelitian, pengelolaan, dan pengusahaan mineral atau batubara, yang meliputi penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, pertambangan, pengolahan, dan pemurnian, pengangkutan dan penjualan, serta kegiatan pascatambang.', '1483972103_No.-22-Pertambangan-Ramah-Lingkungan_final.pdf', 85, 5, NULL, NULL, '/photos/85/1 (1).jpg', '2017-01-09 00:28:23', '2018-09-08 21:10:43'),
-(10, 'TEst', '2018-09-08', 1, 'sadada', '<p>dadadadadad</p>', 'dadad', '1536414193_sample.pdf', 85, 1, NULL, NULL, '/photos/85/images.jpg', '2018-09-08 06:43:13', '2018-09-08 20:43:13'),
-(11, 'asda', '2018-09-08', 1, 'dada', '<p>asdad</p>', 'dad', NULL, 85, 3, NULL, NULL, '/photos/85/1 (2).jpg', '2018-09-08 08:02:55', '2018-09-08 15:02:55'),
-(12, 'asda', '2018-09-08', 1, 'dada', '<p>asdad</p>', 'dad', NULL, 85, 3, NULL, NULL, '/photos/85/1 (2).jpg', '2018-09-08 08:03:37', '2018-09-08 15:03:37'),
-(13, 'gd', '2018-09-08', 1, 'dfg', '<p>gd</p>', 'gd', '/files/85/sample.pdf', 85, 3, NULL, NULL, '/photos/85/1 (2).jpg', '2018-09-08 08:05:01', '2018-09-08 15:05:01');
+INSERT INTO `collections` (`id`, `code`, `date`, `type_id`, `title`, `slug`, `content`, `description`, `filename`, `user_id`, `category_id`, `parent`, `thumbnail`, `created_at`, `updated_at`) VALUES
+(8, '40 Tahun 2011', '2011-10-24', 1, 'BADAL THAWAF IFADHAH', 'badal-tawaf-ifadhah', '', 'Badal Thawaf Ifadhah adalah pelaksanaan thawaf ifadhah yang merupakan rukun haji yang dilakukankan oleh orang lain untuk menggantikan seseorang yang sedang berhaji karena sakit atau sebab lain.', '1483972025_No.-40-Badal-Tawaf-Ifadhah.pdf', 85, 4, NULL, '/photos/85/1 (2).jpg', '2017-01-09 00:27:05', '2018-09-10 15:57:11'),
+(9, '22 Tahun 2011', '2011-05-26', 1, 'PERTAMBANGAN RAMAH LINGKUNGAN', 'pertambangan-ramah-lingkungan', '', 'Pertambangan adalah sebagian atau seluruh tahapan kegiatan dalam rangka penelitian, pengelolaan, dan pengusahaan mineral atau batubara, yang meliputi penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, pertambangan, pengolahan, dan pemurnian, pengangkutan dan penjualan, serta kegiatan pascatambang.', '1483972103_No.-22-Pertambangan-Ramah-Lingkungan_final.pdf', 85, 5, NULL, '/photos/85/1 (1).jpg', '2017-01-09 00:28:23', '2018-09-10 15:57:14'),
+(14, '9786025076701', '2018-09-09 10:00:55', 3, 'EcoMasjid : Dari Masjid Makmurkan Bumi', 'ecomasjid-dari-masjid-makmurkan-bumi', '<p style=\"text-align: justify;\">Masjid-masjid dibangun di tengah-tengah masyarakat tidak hanya sebagai tempat ibadah, tetap juga untuk menyatukan citacita spiritual umat Islam dengan cita-cita sosialnya membangun peradaban dalam masyarakat yang madani. Dalam masyarakat madani, antara masjid dengan aktivitas sehari-sehari masyarakat tidak terpisahkan, simbiosis mutualisme, saling terikat, saling menginspirasi dan saling mendinamisasi kehidupan. Kemampuan dan penempatan masjid, sebagai basis masyarakat madani inilah saat sekarang yang sering dan cenderung dilupakan, padahal tidak sedikit masjid yang hanya dijadikan sebagai sarana ibadah mahdah semata.</p>\r\n<p style=\"text-align: justify;\">Manusia sebagai khalifah di bumi mengemban amanah dan tanggung jawab untuk memakmurkan bumi seisinya. Islam merupakan rahmat bagi seluruh alam (rahmatan lil&lsquo;alamin). Islam yang kehadirannya ditengah kehidupan masyarakat harus mampu memberikan rahmat di dunia maupun di akhirat melalui kedamaian dan kasih sayang bagi bumi beserta seluruh makhluk hidupnya. Islam tidak hanya menaruh perhatian kepada persoalan spiritual dan interaksi dengan sesama, tapi juga menginspirasi umat untuk peduli kepada alam. Namun umat muslim sebagai potensi terbesar bangsa yang seharusnya menjadi&nbsp;subyek sekaligus obyek gerakan perlindungan dan pengelolaan lingkungan hidup dan sumber daya alam itu sendiri, justru masih kurang sadar akan hak serta kewajiban dalam hal pelestarian lingkungan hidup dan pengelolaan sumber daya alam. Pandangan dari mayoritas pakar lingkungan hidup bahwa tindakan praktis dan teknis perlindungan dan pengelolaan lingkungan hidup dan sumber daya alam dengan bantuan sains dan teknologi ternyata bukan solusi yang tepat, yang dibutuhkan adalah perubahan perilaku dan gaya hidup yang beretika. Krisis lingkungan hidup dengan berbagai manifestasinya, sejatinya adalah krisis moral, karena manusia memandang alam sebagai obyek bukan subyek dalam kehidupan semesta. Maka penanggulangan terhadap masalah yang ada haruslah dengan pendekatan moral. Pada titik inilah agama harus tampil berperan melalui bentuk tuntunan keagamaan serta direalisasikan dalam bentuk nyata dalam kehidupan sehari-hari umat manusia. Sesuai dengan peran masjid sebagai basis pembangunan masyarakat madani, masjid bukan hanya semata-mata dijadikan sarana ibadah mahdhah, melainkan ia menjadi sarana dan sekaligus kekuatan dalam membangun dan menanamkan nilai-nilai kebaikan dan pembaharuan kehidupan umat. Sehingga perubahan dalam konteks kebangsaan secara luas berupa perubahan terhadap nilai-nilai yang dibangun&nbsp;melalui basis masjid.</p>', 'Masjid-masjid dibangun di tengah-tengah masyarakat tidak hanya sebagai tempat ibadah, tetap juga untuk menyatukan citacita spiritual umat Islam dengan cita-cita sosialnya membangun peradaban dalam masyarakat yang madani. Dalam masyarakat madani, antara masjid dengan aktivitas sehari-sehari masyarakat tidak terpisahkan, simbiosis mutualisme, saling terikat, saling\r\nmenginspirasi dan saling mendinamisasi kehidupan. Kemampuan dan penempatan masjid, sebagai basis masyarakat madani inilah saat sekarang yang sering dan cenderung dilupakan, padahal tidak sedikit masjid yang hanya dijadikan sebagai sarana ibadah mahdah semata', '/files/shares/BUKU_ECOMASJID_Oleh_Dr_Hayu_Prabowo.pdf', 85, 6, NULL, '/photos/shares/ecomasjid.jpg', '2018-09-09 03:15:12', '2018-09-09 20:17:05'),
+(16, '9786029947557', '2018-09-09 10:32:18', 3, 'Buku Air, Sanitasi dan Kesehatan Lingkungan menurut agama Islam', 'buku-air-sanitasi-dan-kesehatan-lingkungan-menurut-islam', '<p>Ajaran islam tentang air, sanitasi, kebersihan dan kesehatan lingkungan belum diketahui dandifahami oleh segenap lapisan umat, sehingga sering kali penyakit berjangkit disebabkan karena air yang tidak bersih dan sanitasi yang buruk. Oleh karena itu, diperlukan penyebarluasan pengetahuan dan pemahaman tentang air, sanitasi, kebersihan dan kesehatan lingkungan menurut ajaran Islam yang ditunjang dan dilengkapi dengan ilmu kesehatan. Umat Islam Indonesia, sebagai bagian terbesar dari rakyat Indonesia, merupakan golongan yang paling berkepentingan bagi terwujudnya hidup sehat wal afiat sebagai pengamalan ajaran islam.</p>', 'Ajaran islam tentang air, sanitasi, kebersihan dan kesehatan lingkungan belum diketahui dandifahami oleh segenap lapisan umat, sehingga sering kali penyakit berjangkit disebabkan karena air yang tidak bersih dan sanitasi yang buruk. Oleh karena itu, diperlukan penyebarluasan pengetahuan dan pemahaman tentang air, sanitasi, kebersihan dan kesehatan lingkungan menurut ajaran Islam yang ditunjang dan dilengkapi dengan ilmu kesehatan. Umat Islam Indonesia, sebagai bagian terbesar dari rakyat Indonesia, merupakan golongan yang paling berkepentingan bagi terwujudnya hidup sehat wal afiat sebagai pengamalan ajaran islam.', '/files/shares/Buku Air & Sanitasi Munas MUI.pdf', 85, 6, NULL, '/photos/shares/Buku-Air,-Sanitasi-dan-Kesehatan-Lingkungan-menurut-agama-Islam.jpg', '2018-09-09 03:38:02', '2018-09-09 20:17:08'),
+(17, '9786029947595', '2018-09-09 13:46:06', 3, 'KHUTBAH JUMAT : Air, Kebersihan, Sanitasi dan Kesehatan Lingkungan menurut agama Islam', 'khutbah-jumat-air-kebersihan-sanitasi-dan-kesehatan-lingkungan-menurut-agama-islam', '<p>Alhamdulilah, segala puji syukur kita panjatkan ke hadirat Allah Subhanahu wa Ta&rsquo;ala karena atas taufik dan hidayah-Nya, buku Kumpulan Khutbah Jum&rsquo;at tentang Air, Kebersihan dan Kesehatan Lingkungan menurut Agama Islam akhirnya selesai disusun. Khutbah Jum&rsquo;at merupakan sarana atau media yang efektif untuk memberikan bimbingan dan tuntunan kepada umat dalam meningkatkan pengetahuan, pemahaman dan pengamalan ajaran Agama Islam terutama yang terkait dengan Air, Kebersihan dan Kesehatan Lingkungan.</p>', 'Alhamdulilah, segala puji syukur kita panjatkan ke hadirat Allah Subhanahu wa Ta’ala karena atas taufik dan hidayah-Nya, buku Kumpulan Khutbah Jum’at tentang Air, Kebersihan dan Kesehatan Lingkungan menurut Agama Islam akhirnya selesai disusun. Khutbah Jum’at merupakan sarana atau media yang efektif untuk memberikan bimbingan dan tuntunan kepada umat dalam meningkatkan pengetahuan, pemahaman dan pengamalan ajaran Agama Islam terutama yang terkait dengan Air, Kebersihan dan Kesehatan Lingkungan.', '/files/shares/Khutbah WASH.pdf', 85, 6, NULL, '/photos/shares/KHutbah-jumat-air-kebersihan-sanitasi-dan-kesehatan-lingkungan-menurut-agama-islam.jpg', '2018-09-09 06:51:43', '2018-09-09 20:52:19'),
+(24, 'fat-001', '2018-09-03 00:00:00', 1, 'Fatwa Kebakaran hutan', 'fatwa-kebakaran-hutan', '<p>sdfsdffs fsf sf sf sf sf sfs</p>', 'sdfs fsdfsf fsfsd', '/files/shares/BUKU_ECOMASJID_Oleh_Dr_Hayu_Prabowo.pdf', 85, 5, NULL, '/photos/shares/KHutbah-jumat-air-kebersihan-sanitasi-dan-kesehatan-lingkungan-menurut-agama-islam.jpg', '2018-09-10 22:30:34', '2018-09-11 05:30:34');
 
 --
 -- Triggers `collections`
@@ -241,7 +272,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `email`, `password`, `activated`, `activation_code`, `activated_at`, `last_login`, `reset_password_code`, `remember_token`, `first_name`, `last_name`, `api_token`, `created_at`, `updated_at`, `photo`) VALUES
-(85, 2, 'admin', 'digicrea08@gmail.com', '$2y$10$dMcwvMlQ86utxn4XqkjL8eZsUJ/75yF/4rsxPn7qwRwZP3k9qkrGe', 1, NULL, NULL, NULL, 'DyIU8daVDV79KYftqqLVWpgXMFtbL2ww', 'zLnfEr0irZzElQykcYfuNG14MS7ouMY2K8HqZDpf5TmrHCCkrd908WGUSte5', 'Admin', 'Super', '', '2016-11-27 05:29:35', '2017-01-09 14:28:38', '1483368029648cd749759267f65925c344b43e1613.jpg');
+(85, 2, 'admin', 'digicrea08@gmail.com', '$2y$10$dMcwvMlQ86utxn4XqkjL8eZsUJ/75yF/4rsxPn7qwRwZP3k9qkrGe', 1, NULL, NULL, NULL, 'DyIU8daVDV79KYftqqLVWpgXMFtbL2ww', 'D5JJAUC0myCxnPNEQajXltASDGQFDsWr91JXuTmFrY2Otv3beu1pVFLnOQAR', 'Admin', 'Super', '', '2016-11-27 05:29:35', '2017-01-09 14:28:38', '1483368029648cd749759267f65925c344b43e1613.jpg');
 
 --
 -- Indexes for dumped tables
@@ -251,6 +282,12 @@ INSERT INTO `users` (`id`, `role_id`, `username`, `email`, `password`, `activate
 -- Indexes for table `authors`
 --
 ALTER TABLE `authors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `author_collection`
+--
+ALTER TABLE `author_collection`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -325,19 +362,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `author_collection`
+--
+ALTER TABLE `author_collection`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `collections`
 --
 ALTER TABLE `collections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `permissions`

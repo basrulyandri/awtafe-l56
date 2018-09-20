@@ -11,7 +11,18 @@
                 <div class="col-md-8" style="border:0px solid gray">
                     <!-- Datos del vendedor y titulo del producto -->
                     <h3>{{$buku->title}}</h3>    
-                    <h5 style="color:#337ab7">Penulis: <a href="#">{{$buku->author->name}}</a> </h5>
+
+                    @if($buku->isBuku())
+                    <h5 style="color:#337ab7">Penulis: 
+                    @foreach($buku->authors as $author)
+                      <a href="#">{{$author->name}}</a>
+                    @endforeach
+                    </h5>
+                    @endif
+
+                    @if($buku->isFatwa())
+                      <h5 style="color:#337ab7">{{$buku->code}}</h5>
+                    @endif
         
                   
                     <div class="section">
@@ -35,8 +46,7 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                       </div>
                     </div>
                   </div>

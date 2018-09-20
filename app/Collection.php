@@ -32,14 +32,46 @@ class Collection extends Model
 		return $this->belongsTo('App\Category');
 	}
 
-    public function author()
+    public function authors()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsToMany(Author::class);
     }
 
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function isFatwa()
+    {
+        if($this->type->id == 1){
+            return true;
+        }
+        return false;
+    }
+
+    public function isIjtima()
+    {
+        if($this->type->id == 2){
+            return true;
+        }
+        return false;
+    }
+
+    public function isBuku()
+    {
+        if($this->type->id == 3){
+            return true;
+        }
+        return false;
+    }
+
+    public function isArtikel()
+    {
+        if($this->type->id == 4){
+            return true;
+        }
+        return false;
     }
 
 }

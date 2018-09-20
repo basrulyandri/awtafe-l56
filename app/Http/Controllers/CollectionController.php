@@ -24,6 +24,7 @@ class CollectionController extends Controller
 
     public function destroy(Collection $collection)
     {
+        $collection->authors()->detach();
         $collection->delete();
         return redirect()->route('collection.index')->with('toastr-success','Koleksi Berhasil di hapus.');
     }
@@ -42,7 +43,7 @@ class CollectionController extends Controller
     {
         //dd($request->all());
     	$fatwa = \App\Collection::create($request->all());
-    	return redirect()->route('fatwa.index')->with('success','Data Fatwa Berhasil ditambahkan');
+    	return redirect()->route('collection.index')->with('success','Data Fatwa Berhasil ditambahkan');
     }
 
     public function book()
@@ -59,7 +60,9 @@ class CollectionController extends Controller
 
     public function insertbook(Request $request)
     {
-        $fatwa = \App\Collection::create($request->all());
-        return redirect()->route('book.index')->with('success','Data Buku Berhasil ditambahkan');
+        $fatwa = \App\Collection::create($request->except(['author_id']));
+        //dd($fatwa->authors());
+        $fatwa->authors()->attach($request->author_id);
+        return redirect()->route('collection.index')->with('success','Data Buku Berhasil ditambahkan');
     }
 }
