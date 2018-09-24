@@ -118,7 +118,7 @@
 
 @section('footer')
 <script src="{{asset('assets/backend/plugins/tinymce/tinymce.min.js')}}"></script>
-<script src="{{asset('/')}}/vendor/laravel-filemanager/js/lfm.js"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/lfm.js')}}"></script>
 	<script>
 		$(document).ready(function(){
 	    	var editor_config = {

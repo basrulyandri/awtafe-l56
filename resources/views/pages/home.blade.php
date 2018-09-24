@@ -24,10 +24,9 @@
       </section>
 
       <div class="album py-5 bg-light">
-        <div class="container">
-            
+        <div class="container">            
           <div class="row">
-             @foreach(collections() as $collection)
+             @foreach(collections() as $collection)             
             <div class="col-md-2">
               <div class="card mb-4 shadow-sm">
                 <a href="{{route('page.buku.single',$collection->slug)}}"><img class="card-img-top" src="{{url('/')}}{{$collection->thumbnail}}"></a>

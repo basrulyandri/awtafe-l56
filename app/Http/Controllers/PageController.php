@@ -18,7 +18,7 @@ class PageController extends Controller
     public function bukusingle($slug)
     {
         $buku = Collection::whereSlug($slug)->first();
-        return view('pages.bukusingle',compact('buku'));
+        return \Response::view('pages.bukusingle',compact('buku'));
     }
 
     public function downloadbrosur()

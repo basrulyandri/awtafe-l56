@@ -65,7 +65,7 @@
 <script type="text/javascript" src="{{asset('assets/frontend/js')}}/pdfobject.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    PDFObject.embed('{{url("/")}}/{{$buku->filename}}','#my-pdf')
+    PDFObject.embed('{{url("/")}}{{$buku->filename}}','#my-pdf')
   });
 </script>
 @stop
