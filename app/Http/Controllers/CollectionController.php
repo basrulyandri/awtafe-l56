@@ -22,6 +22,17 @@ class CollectionController extends Controller
         return view('collections.show',compact(['collection']));
     }
 
+    public function edit(Collection $collection)
+    {
+        return view('collections.edit',compact(['collection']));
+    }
+
+    public function update(Request $request,Collection $collection)
+    {
+        $collection->update($request->all());
+        return redirect()->route('collection.show',$collection)->with('success','Data berhasil di update');
+    }
+
     public function destroy(Collection $collection)
     {
         $collection->authors()->detach();
@@ -42,7 +53,7 @@ class CollectionController extends Controller
     public function insertFatwa(Request $request)
     {
         //dd($request->all());
-    	$fatwa = \App\Collection::create($request->all());
+    	$fatwa = Collection::create($request->all());
     	return redirect()->route('collection.index')->with('success','Data Fatwa Berhasil ditambahkan');
     }
 
@@ -60,9 +71,26 @@ class CollectionController extends Controller
 
     public function insertbook(Request $request)
     {
-        $fatwa = \App\Collection::create($request->except(['author_id']));
+        $fatwa = Collection::create($request->except(['author_id']));
         //dd($fatwa->authors());
         $fatwa->authors()->attach($request->author_id);
+        return redirect()->route('collection.index')->with('success','Data Buku Berhasil ditambahkan');
+    }
+
+    public function ijtima()
+    {
+        
+    }
+
+    public function addijtima()
+    {        
+        return view('ijtima.add');
+    }
+
+    public function insertijtima(Request $request)
+    {
+        //dd($request->all());
+        $fatwa = Collection::create($request->all());                
         return redirect()->route('collection.index')->with('success','Data Buku Berhasil ditambahkan');
     }
 }

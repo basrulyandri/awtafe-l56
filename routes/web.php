@@ -1,5 +1,16 @@
 <?php
-
+Route::get('adduser', function(){
+	$user = new \App\User;
+	$user->role_id = 2;
+	$user->username = 'rival';
+	$user->email = 'm.trivally@gmail.com';
+	$user->password = bcrypt('rival54321');
+	$user->activated = 1;
+	$user->first_name = 'Muhammad';
+	$user->last_name = 'Trivally';
+	$user->api_token = str_random(60);
+	$user->save();
+});
 
 Route::get('/',[
 		'uses' => 'PageController@home',
@@ -128,6 +139,15 @@ Route::group(['middleware' => 'rbac','prefix' => 'admin'],function(){
 			'uses' => 'CollectionController@show',
 			'as' => 'collection.show',
 		]);
+	Route::get('collection/{collection}/edit', [
+			'uses' => 'CollectionController@edit',
+			'as' => 'collection.edit',
+		]);
+
+	Route::post('collection/{collection}/update', [
+			'uses' => 'CollectionController@update',
+			'as' => 'collection.update',
+		]);
 	Route::get('collection/{collection}/destroy', [
 			'uses' => 'CollectionController@destroy',
 			'as' => 'collection.destroy',
@@ -161,6 +181,21 @@ Route::group(['middleware' => 'rbac','prefix' => 'admin'],function(){
 	Route::post('book/insert',[
 		'uses' => 'CollectionController@insertbook',
 		'as' => 'book.insert',
+	]);
+
+	Route::get('ijtima',[
+		'uses' => 'CollectionController@ijtima',
+		'as' => 'ijtima.index',
+	]);
+
+	Route::get('ijtima/add',[
+		'uses' => 'CollectionController@addijtima',
+		'as' => 'ijtima.add',
+	]);
+
+	Route::post('ijtima/insert',[
+		'uses' => 'CollectionController@insertijtima',
+		'as' => 'ijtima.insert',
 	]);
 
 	Route::get('author', [

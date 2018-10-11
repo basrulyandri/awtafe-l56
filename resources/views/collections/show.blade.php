@@ -40,7 +40,7 @@
               </ul>
 
               <a target="_blank" href="{{url('/')}}{{$collection->filename}}" class="btn btn-primary"><b>Lihat</b></a>
-              <a href="" class="btn btn-warning"><b>Edit</b></a>
+              <a href="{{route('collection.edit',$collection)}}" class="btn btn-warning"><b>Edit</b></a>
               <a href="{{route('collection.destroy',$collection)}}" class="btn btn-danger"><b>Hapus</b></a>
             </div>
             <!-- /.box-body -->

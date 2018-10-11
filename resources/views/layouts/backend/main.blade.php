@@ -65,7 +65,7 @@
             <a href="{{route('fatwa.add')}}" class="btn btn-app bg-purple">
               <i class="fa fa-file-archive-o"></i> Fatwa
             </a>
-            <a class="btn btn-app bg-olive">
+            <a href="{{route('ijtima.add')}}" class="btn btn-app bg-olive">
               <i class="fa fa-archive"></i> Ijtima'
             </a>
             <a href="{{route('book.add')}}" class="btn btn-app bg-navy">

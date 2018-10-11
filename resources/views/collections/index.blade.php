@@ -26,7 +26,9 @@
             <div class="info-box-content">
               <span class="info-box-number"><a  style="color: #000" href="{{route('collection.show',$collection)}}">{{$collection->title}}</a></span>
               <span class="text-muted"><i class="fa fa-barcode"></i> {{$collection->code}}</span><br>
+              @if($collection->isBuku())
               <span class="text-muted"><i class="fa fa-calendar"></i> {{$collection->date}} Kategori: <strong>{{$collection->category->name}}</strong></span>
+              @endif
             </div>
             <div class="info-box-description" style="clear: both;padding: 5px; max-height: 68px;overflow: hidden">
             	<span class="text-muted">{{$collection->description,100}}</span>
