@@ -185,12 +185,12 @@ function wilayah($idvillage){
     return $wilayah->kelurahan.' '.$wilayah->kecamatan.' '.$wilayah->kabupaten.' '.$wilayah->provinsi;
 }
 
-function collections($type_id= 0,$limit = 12)
+function collections($paginate = 12,$type_id= 0)
 {
 	if($type_id == 0){
-		return \App\Collection::orderBy('created_at','desc')->limit($limit)->get();		
+		return \App\Collection::orderBy('created_at','desc')->paginate($paginate);		
 	}
-	return \App\Collection::whereTypeId($type_id)->orderBy('created_at','desc')->limit($limit)->get();
+	return \App\Collection::whereTypeId($type_id)->orderBy('created_at','desc')->paginate($paginate);
 }
 
 

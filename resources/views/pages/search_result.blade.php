@@ -14,7 +14,7 @@
                 <div class="col-md-12">
                       {!!Form::open(['route' =>'page.search','method' => 'GET'])!!}
                     <div class="input-group mb-3">
-                      <input type="text" name="search_query" class="form-control" placeholder="Cari Buku" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                      <input type="text" name="search_query" class="form-control" placeholder="Cari Buku" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{request()->input('search_query')}}">
                       <div class="input-group-append">
                         <input type="submit" class="btn btn-primary" value="Cari">
                       </div>
@@ -28,9 +28,7 @@
       <div class="album py-5 bg-light">
         <div class="container">            
           <div class="row">
-            @php
-            $collections = collections();
-            @endphp
+            
              @foreach($collections as $collection)             
             <div class="col-md-2">
               <div class="card mb-4 shadow-sm">

@@ -87,4 +87,12 @@ class PageController extends Controller
         return response()->json(['msg' => $hasil1]);
     }
 
+    public function search(Request $request)
+    {
+        //dd($request->search_query);
+        $collections = Collection::where('title','LIKE','%'.$request->search_query.'%')->orderBy('created_at','desc')->paginate(20);
+        return view('pages.search_result',compact(['collections']));
+        
+    }
+
 }

@@ -18,6 +18,11 @@ Route::get('/',[
 	]
 );
 
+Route::get('search', [
+		'uses' => 'PageController@search',
+		'as' => 'page.search',
+	]);
+
 Route::get('buku/{slug}', [
 		'uses' => 'PageController@bukusingle',
 		'as' => 'page.buku.single',
